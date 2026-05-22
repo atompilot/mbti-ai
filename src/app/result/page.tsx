@@ -6,8 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
 import { DIMENSIONS, type TestResult } from "@/lib/mbti/types";
 import { cn } from "@/lib/utils";
+import { SpectrumRadar } from "@/components/result/SpectrumRadar";
 
 const STORAGE_KEY = "mbti-ai:last-result";
 
@@ -50,7 +52,18 @@ export default function ResultPage() {
         </p>
       </div>
 
+      <Card>
+        <CardContent className="pt-6">
+          <SpectrumRadar scores={result.scores} type={result.type} />
+        </CardContent>
+      </Card>
+
+      <Separator />
+
       <div className="space-y-4">
+        <h2 className="text-sm font-medium uppercase tracking-wider text-zinc-500">
+          Per-dimension breakdown
+        </h2>
         {DIMENSIONS.map((dim) => {
           const s = result.scores[dim.code];
           return (
